@@ -1,0 +1,17 @@
+<div align="left" id="from"><%= @from %></div>
+<div align="right" id="to"><%= @to %></div>
+
+<div id="messages">
+  <% @messages.each do |message| %>
+    <% if @from == message.from %>
+      <div align="left"><%= message.content %></div>
+    <% else %>
+      <div align="right"><%= message.content %></div>
+    <% end %>
+  <% end %>
+</div>
+
+ <form>
+   <input type="text" data-behavior="speak">
+     <button type="submit" id="submit">Submit</button>
+ </form>
