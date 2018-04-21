@@ -1,5 +1,5 @@
-<form action="/messages" method="GET">
-    User1: <input type="text" id="from" name="from">
-    User2: <input type="text" id="to" name="to">
+<form action="/home" method="POST">
+     <%= token_tag nil %>
+    Nombre: <input type="text" id="user" name="user">
     <button type="submit" id="submit">Submit</button>
 </form>

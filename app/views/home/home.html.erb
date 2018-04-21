@@ -1,0 +1,20 @@
+<h2>Hello! <%= session[:user] %></h2>
+
+<p>Create a group</p>
+
+<form action="/group" method="POST">
+    <%= token_tag nil %>
+    Nombre del grupo: <input type="text" id="gname" name="gname">
+    <button type="submit" id="submit">Submit</button>
+</form>
+
+<p>Select a group to join and start chatting</p>
+
+<div class="groups">
+    <% @groups.each do |group| %>
+        <p><%= group.name %> 
+        </p>
+        <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %> 
+        <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %> 
+    <% end %>
+</div>

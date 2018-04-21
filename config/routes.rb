@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  get '/', to: 'home#index' #ingresar usuarios
+  get '/', to: 'home#index' #ver grupos y crear
+  post '/home', to: 'home#home' #ingresar usuario
+  get '/home', to: 'home#home' #ingresar usuario
+  post '/group', to: 'groups#create' #crear grupo
+  delete '/group/delete/:id_group', to: 'groups#delete' #eliminar grupo
+  post '/group/join/:id_group', to: 'groups#join' #unirse a grupo
   get '/messages', to: 'messages#show' #chat
+  get '/messages/:id_group', to: 'messages#list' #ver mensajes de grupo
   mount ActionCable.server => '/cable'
 end
