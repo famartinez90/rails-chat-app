@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_012205) do
+ActiveRecord::Schema.define(version: 2018_04_21_182323) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_012205) do
 
   create_table "messages", force: :cascade do |t|
     t.string "from"
-    t.string "to"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
