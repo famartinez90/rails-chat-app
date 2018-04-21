@@ -1,7 +1,7 @@
 $(document).on 'ready', () ->
 	App.chat = App.cable.subscriptions.create(
 		{
-			channel: 'ChatChannel',
+			channel: $('#channel_type').text(),
 			group: $('#id_group').text()
 		},
 		{

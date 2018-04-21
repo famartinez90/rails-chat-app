@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   delete '/group/delete/:id_group', to: 'groups#delete' #eliminar grupo
   post '/group/join/:id_group', to: 'groups#join' #unirse a grupo
   get '/messages', to: 'messages#show' #chat
-  get '/messages/:id_group', to: 'messages#list' #ver mensajes de grupo
+  get '/messages/group/:id_group', to: 'messages#getGroupMessages' #ver mensajes de grupo
+  get '/messages/public', to: 'messages#getPublicMessages' #ver mensajes publicos
+  get '/messages/private/:id_user', to: 'messages#getPrivateMessages' #ver mensajes privados con usuarios
   mount ActionCable.server => '/cable'
 end

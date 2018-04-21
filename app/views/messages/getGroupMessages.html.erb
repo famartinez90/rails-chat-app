@@ -4,7 +4,6 @@
 
 <div id="messages" style="max-width: 300px">
     <% @messages.each do |message| %>
-        <%= message.from %>
         <% if defined? message.from %>
             <div align="left">
                 <p style="color:#2196F3"><%= message.from %></p>
@@ -20,5 +19,6 @@
 
 <div id="from" style="display:none"><%= @user %></div>
 <div id="id_group" style="display:none"><%= @group.id %></div>
+<div id="channel_type" style="display:none"><%= @channelType %></div>
 
 <input type="text" data-behavior="speak" name="message">

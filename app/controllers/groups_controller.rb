@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     def join
         Message.create(:id_group => params['id_group'], :content => session[:user] + ' se ha unido al grupo!')
 
-        redirect_to '/messages/' + params['id_group']
+        redirect_to '/messages/group/' + params['id_group']
     end
 
     def delete

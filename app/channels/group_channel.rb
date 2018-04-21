@@ -1,4 +1,4 @@
-class ChatChannel < ApplicationCable::Channel
+class GroupChannel < ApplicationCable::Channel
 	def subscribed
 		stream_from "group#{params['group']}:messages"
 	end
