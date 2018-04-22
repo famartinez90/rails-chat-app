@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 		channel = ChannelFactory.create(:group, { id_group: params['id_group'] })
 
 		@channelType = channel.getType()
-		@user = session[:user]
+		@user = cookies.encrypted[:user]
 		@group = channel.getChannelData()
 		@messages = channel.getChannelMessages()
 
@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
 		channel = ChannelFactory.create(:lobby, {})
 		
 		@channelType = channel.getType()
-		@user = session[:user]
+		@user = cookies.encrypted[:user]
 		@messages = channel.getChannelMessages()
 
 		render template: "chat/chat"

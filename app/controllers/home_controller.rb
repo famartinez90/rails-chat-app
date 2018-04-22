@@ -1,13 +1,22 @@
 class HomeController < ApplicationController
 	def index
+		if cookies.encrypted[:user]
+			redirect_to '/home'
+		end
+	end
+
+	def logout
+		cookies.delete 'user'
+
+		redirect_to '/'
 	end
 
 	def home
-		unless session[:user]
-			session[:user] = params['user']
+		unless cookies.encrypted[:user]
+			cookies.encrypted[:user] = params['user']
 		end
 
 		@groups = Group.all()
-		@active_users = User.where.not(:name => session[:user])
+		@active_users = User.where.not(:name => cookies.encrypted[:user])
 	end
 end

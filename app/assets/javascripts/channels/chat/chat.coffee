@@ -1,9 +1,3 @@
-#= require action_cable
-#= require_self
-
-@App = @App || {}
-App.cable = App.cable || ActionCable.createConsumer()
-
 $(document).on 'ready', () ->
 	params = {
 			channel: $('#channel_type').text(),

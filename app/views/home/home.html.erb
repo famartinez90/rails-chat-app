@@ -1,7 +1,9 @@
 <%= javascript_include_tag 'home' %>
 
-<h2>Hello! <%= session[:user] %></h2>
-<div id="user" style="display: none;"><%= session[:user] %></div> <!-- FIXME: como obtengo el usuario sino? -->
+<%= button_to('Desconectarse', "/logout", method: "post") %>
+
+<h2>Hello! <%= cookies.encrypted[:user] %></h2>
+<div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div> <!-- FIXME: como obtengo el usuario sino? -->
 
 <p>Entrar al lobby:</p>
 
