@@ -8,5 +8,6 @@ class HomeController < ApplicationController
 		end
 
 		@groups = Group.all()
+		@active_users = User.where.not(:name => session[:user])
 	end
 end

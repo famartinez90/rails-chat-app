@@ -1,3 +1,20 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+#= require action_cable
+#= require_self
+
+@App = @App || {}
+App.cable = App.cable || ActionCable.createConsumer()
+App.active_users = App.cable.subscriptions.create(
+  "HomeChannel",
+  connected: ->
+    user = $('#user').text()
+    @perform 'speak', { connected_user: user }
+
+  disconnected: ->
+
+  received: (data) ->
+    current_user = $('#user').text()
+    if data.connected_user && data.connected_user != current_user
+      $('#active_users').append("<div>#{data.connected_user}</div>")
+    # TODO: else if data.disconnected_user
+
+)

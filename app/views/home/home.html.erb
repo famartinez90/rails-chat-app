@@ -1,4 +1,7 @@
+<%= javascript_include_tag 'home' %>
+
 <h2>Hello! <%= session[:user] %></h2>
+<div id="user" style="display: none;"><%= session[:user] %></div> <!-- FIXME: como obtengo el usuario sino? -->
 
 <p>Entrar al lobby:</p>
 
@@ -16,9 +19,17 @@
 
 <div class="groups">
     <% @groups.each do |group| %>
-        <p><%= group.name %> 
-        </p>
-        <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %> 
-        <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %> 
+        <p><%= group.name %></p>
+        <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %>
+        <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %>
     <% end %>
+</div>
+
+<p>Active users</p>
+<div id="active_users">
+  <% @active_users.each do |user| %>
+      <p><%= user.name %></p>
+      <!-- TODO -->
+      <%= button_to('Chat', "#", method: "post") %>
+  <% end %>
 </div>
