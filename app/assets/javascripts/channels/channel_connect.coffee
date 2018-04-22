@@ -1,25 +1,40 @@
 $(document).on 'ready', () ->
-	App.chat = App.cable.subscriptions.create(
-		{
+	params = {
 			channel: $('#channel_type').text(),
-			group: $('#id_group').text()
-		},
+			user: $('#from').text()
+		}
+
+	if $('#id_group') != undefined
+		params['group'] = $('#id_group').text()
+
+
+	App.chat = App.cable.subscriptions.create(
+		params
 		{
 			connected: ->
 				console.log('conectado')
 				console.log($('#id_group').text())
 
 			received: (data) ->
-				$('#messages').append(
-					"<p style='color:#2196F3'>
-						#{data.from}
-					</p>
-					<div align=left>
-						#{data.message}
-					</div>")
+				message = ''
+
+				if data.from
+					message += "<div align='left'>
+								<p style='color:#2196F3'>
+									#{data.from}
+								</p>"
+				else
+					message += "<div align='center'>"
+				
+				message += "#{data.message}
+							</div>"
+
+				console.log(message)
+				
+				$('#messages').append(message)
 
 			speak: (from, id_group, message) ->
-				@perform 'speak', { from: from, message: message, id_group: id_group }
+				@perform 'speak', { from: from, message: message.trim(), id_group: id_group }
 		}
 	)
 

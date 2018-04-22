@@ -1,0 +1,32 @@
+<%= javascript_include_tag 'cable' %>
+
+<%= button_to('Salir', "/home", method: "get") %>
+
+<% if defined? @group %>
+    <h2>Grupo: <%= @group.name %></h2>
+<% else %>
+    <h2>Lobby</h2>
+<% end %>
+
+<div id="messages" style="max-width: 300px">
+    <%- @messages.each do |message| -%>
+        <%- if message[:from] -%>
+            <div align="left">
+                <p style="color:#2196F3"><%= message.from -%></p>
+                <%= message.content -%>
+            </div>
+        <%- else -%>
+            <div align="center">
+                <%= message.content -%>
+            </div>
+        <%- end -%>
+    <%- end -%>
+</div>
+
+<div id="from" style="display:none"><%= @user %></div>
+<div id="channel_type" style="display:none"><%= @channelType %></div>
+<% if defined? @group %>
+    <div id="id_group" style="display:none"><%= @group.id %></div>
+<% end %>
+
+<input type="text" data-behavior="speak" name="message">

@@ -6,10 +6,18 @@ class MessagesController < ApplicationController
 		@user = session[:user]
 		@group = channel.getChannelData()
 		@messages = channel.getChannelMessages()
-	end
 
-	def getPulicMessages
-		# TODO
+		render template: "chat/chat"
+	end
+	
+	def getLobbyMessages
+		channel = ChannelFactory.create(:lobby, {})
+		
+		@channelType = channel.getType()
+		@user = session[:user]
+		@messages = channel.getChannelMessages()
+
+		render template: "chat/chat"
 	end
 
 	def getPrivateMessages

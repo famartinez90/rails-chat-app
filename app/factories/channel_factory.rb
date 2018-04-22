@@ -1,7 +1,7 @@
 class ChannelFactory
     TYPES = {
         group: GroupChannelController,
-        public: PublicChannelController,
+        lobby: LobbyChannelController,
         private: PrivateChannelController
     }
     

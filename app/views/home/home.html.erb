@@ -1,5 +1,9 @@
 <h2>Hello! <%= session[:user] %></h2>
 
+<p>Entrar al lobby:</p>
+
+<%= button_to('Join', "/lobby/join", method: "post") %>
+
 <p>Create a group</p>
 
 <form action="/group" method="POST">
