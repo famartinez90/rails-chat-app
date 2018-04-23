@@ -14,7 +14,12 @@ $(document).on 'ready', () ->
 				if data.disconnected_user
 					console.log('se desconecto el usuario ' + data.disconnected_user)
 
-				if data.connected_user && data.connected_user != current_user
-					$('#active_users').append("<div>#{data.connected_user}</div>")
+				if data.connected_user
+					if data.connected_user != current_user
+						$('#active_users').append("<div>#{data.connected_user}</div>")
+				else if data.disconnected_user
+					$('#active_users').children('div').filter( ->
+						$(this).text() == data.disconnected_user
+					).remove()
 		}
 	)

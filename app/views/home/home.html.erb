@@ -1,11 +1,11 @@
 <%= javascript_include_tag 'home' %>
 
-<%= button_to('Desconectarse', "/logout", method: "post") %>
+<%= button_to('Logout', "/logout", method: "post") %>
 
 <h2>Hello! <%= cookies.encrypted[:user] %></h2>
-<div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div> <!-- FIXME: como obtengo el usuario sino? -->
+<div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div>
 
-<p>Entrar al lobby:</p>
+<p>Join lobby:</p>
 
 <%= button_to('Join', "/lobby/join", method: "post") %>
 
@@ -13,7 +13,7 @@
 
 <form action="/group" method="POST">
     <%= token_tag nil %>
-    Nombre del grupo: <input type="text" id="gname" name="gname">
+    Group name: <input type="text" id="gname" name="gname">
     <button type="submit" id="submit">Submit</button>
 </form>
 
@@ -29,9 +29,7 @@
 
 <p>Active users</p>
 <div id="active_users">
-  <% @active_users.each do |user| %>
-      <p><%= user.name %></p>
-      <!-- TODO -->
-      <%= button_to('Chat', "#", method: "post") %>
-  <% end %>
+    <% @active_users.each do |user| %>
+        <p><%= user.name %></p>
+    <% end %>
 </div>
