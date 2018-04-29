@@ -14,6 +14,6 @@ class GroupChannelController
     end
 
     def getChannelMessages
-        return Message.where(:id_group => @id_group).order(:created_at)
+        return GroupMessage.where(:id_group => @id_group).order(:created_at)
     end
 end
