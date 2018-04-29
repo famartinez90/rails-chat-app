@@ -1,4 +1,4 @@
-$(document).on 'ready', () ->
+ready = ->
 	params = {
 			channel: $('#channel_type').text(),
 			user: $('#from').text()
@@ -49,3 +49,6 @@ $(document).on 'ready', () ->
 			App.chat.speak from, to, id_group,event.target.value
 			event.target.value = ''
 			event.preventDefault()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

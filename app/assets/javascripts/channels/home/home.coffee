@@ -1,4 +1,4 @@
-$(document).on 'ready', () ->
+ready = ->
 	App.active_users = App.cable.subscriptions.create(
 		"HomeChannel",
 		{
@@ -35,3 +35,6 @@ $(document).on 'ready', () ->
 		}
 	)
 
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
