@@ -12,6 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2018_04_22_150304) do
 
+  create_table "group_messages", force: :cascade do |t|
+    t.string "from"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "id_group"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
   end
@@ -23,12 +31,12 @@ ActiveRecord::Schema.define(version: 2018_04_22_150304) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "private_messages", force: :cascade do |t|
     t.string "from"
+    t.string "to"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "id_group"
   end
 
   create_table "users", force: :cascade do |t|

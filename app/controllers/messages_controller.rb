@@ -21,10 +21,13 @@ class MessagesController < ApplicationController
 	end
 
 	def getPrivateMessages
-		channel = ChannelFactory.create(:private, {})
+		current_user = cookies.encrypted[:user]
+		to = params['id_user']
+		channel = ChannelFactory.create(:private, {from: current_user, to: to})
 
 		@channelType = channel.getType()
-		@user = cookies.encrypted[:user]
+		@user = current_user
+		@message_to = to
 		@messages = channel.getChannelMessages()
 
 		render template: "chat/chat"

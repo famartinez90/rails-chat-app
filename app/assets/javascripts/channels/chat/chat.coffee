@@ -7,6 +7,9 @@ $(document).on 'ready', () ->
 	if $('#id_group') != undefined
 		params['group'] = $('#id_group').text()
 
+	if $('#to') != undefined
+		params['to'] = $('#to').text()
+
 
 	App.chat = App.cable.subscriptions.create(
 		params
@@ -33,8 +36,8 @@ $(document).on 'ready', () ->
 
 				$('#messages').append(message)
 
-			speak: (from, id_group, message) ->
-				@perform 'speak', { from: from, message: message.trim(), id_group: id_group }
+			speak: (from, to, id_group, message) ->
+				@perform 'speak', { from: from, to: to, message: message.trim(), id_group: id_group }
 		}
 	)
 
@@ -42,6 +45,7 @@ $(document).on 'ready', () ->
 		if event.keyCode is 13 # return/enter = send
 			from = $('#from').text()
 			id_group = $('#id_group').text()
-			App.chat.speak from, id_group, event.target.value
+			to = $('#to').text()
+			App.chat.speak from, to, id_group,event.target.value
 			event.target.value = ''
 			event.preventDefault()

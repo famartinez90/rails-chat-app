@@ -3,3 +3,4 @@ class PrivateController < ApplicationController
         redirect_to '/messages/private/' + params['to']
     end
 end
+
