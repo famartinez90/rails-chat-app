@@ -16,7 +16,16 @@ $(document).on 'ready', () ->
 
 				if data.connected_user
 					if data.connected_user != current_user
-						$('#active_users').append("<div>#{data.connected_user}</div>")
+						$('#active_users').append(
+							"<div id=#{data.connected_user}>\
+								<p>#{data.connected_user}</p>\
+                <form action=/private/join class=button_to data-remote=true method=post>\
+                  <div>
+                    <input type=submit value=chat>\
+                    <input type=hidden name=to value=#{data.connected_user}>\
+                </div>\
+                </form>\
+							</div>")
 				else if data.disconnected_user
 					$('#active_users').children('div').filter( ->
 						$(this).text() == data.disconnected_user

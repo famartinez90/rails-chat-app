@@ -21,6 +21,12 @@ class MessagesController < ApplicationController
 	end
 
 	def getPrivateMessages
-		# TODO
+		channel = ChannelFactory.create(:private, {})
+
+		@channelType = channel.getType()
+		@user = cookies.encrypted[:user]
+		@messages = channel.getChannelMessages()
+
+		render template: "chat/chat"
 	end
 end
