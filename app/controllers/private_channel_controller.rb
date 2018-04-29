@@ -11,7 +11,6 @@ class PrivateChannelController
     end
 
     def getChannelData
-        #TODO
     end
 
     def getChannelMessages

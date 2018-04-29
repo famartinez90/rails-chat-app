@@ -17,6 +17,5 @@ class HomeController < ApplicationController
 		end
 
 		@groups = Group.all()
-		@active_users = User.where.not(:name => cookies.encrypted[:user])
 	end
 end

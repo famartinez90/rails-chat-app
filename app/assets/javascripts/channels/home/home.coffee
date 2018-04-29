@@ -5,6 +5,7 @@ $(document).on 'ready', () ->
 			connected: ->
 				user = $('#user').text()
 				@perform 'speak', { connected_user: user }
+				@perform 'speak', { active_users_ping: true  }
 
 			disconnected: ->
 
@@ -15,7 +16,7 @@ $(document).on 'ready', () ->
 					console.log('se desconecto el usuario ' + data.disconnected_user)
 
 				if data.connected_user
-					if data.connected_user != current_user
+					if data.connected_user != current_user && $("#active_users ##{data.connected_user}").length == 0
 						$('#active_users').append(
 							"<div id=#{data.connected_user}>\
 								<p>#{data.connected_user}</p>\
@@ -27,8 +28,10 @@ $(document).on 'ready', () ->
                 </form>\
 							</div>")
 				else if data.disconnected_user
-					$('#active_users').children('div').filter( ->
-						$(this).text() == data.disconnected_user
-					).remove()
+          $("#active_users ##{data.disconnected_user}").remove()
+        else if data.active_users_ping
+          @perform 'speak', { connected_user: $('#user').text() }
+
 		}
 	)
+
