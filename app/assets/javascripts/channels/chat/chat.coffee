@@ -25,12 +25,12 @@ $(document).on 'ready', () ->
 								</p>"
 				else
 					message += "<div align='center'>"
-				
+
 				message += "#{data.message}
 							</div>"
 
 				console.log(message)
-				
+
 				$('#messages').append(message)
 
 			speak: (from, id_group, message) ->
