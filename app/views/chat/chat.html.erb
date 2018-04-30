@@ -42,6 +42,12 @@
 
 <%= form_tag '/upload', multipart: true do %>
     <input type="hidden" name="type" style="display:none" value="<%= @type %>">
+    <% if defined? @group %>
+        <input type="hidden" name="id_group" style="display:none" value="<%= @group.id %>">
+    <% end %>
+    <% if defined? @message_to %>
+        <input type="hidden" name="message_to" style="display:none" value="<%= @message_to %>">
+    <% end %>
     <input type="hidden" name="from" style="display:none" value="<%= @user %>">
     <label for="file">File to Upload</label> <%= file_field_tag "file" %>
     <%= submit_tag %>

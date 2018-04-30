@@ -15,13 +15,11 @@ ready = ->
 		params
 		{
 			connected: ->
-				console.log('conectado')
-				console.log($('#id_group').text())
 
 			received: (data) ->
 				message = ''
 
-				if data.from
+				if data.from?
 					message += "<div align='left'>
 								<p style='color:#2196F3'>
 									#{data.from}
@@ -29,10 +27,13 @@ ready = ->
 				else
 					message += "<div align='center'>"
 
-				message += "#{data.message}
-							</div>"
-
-				console.log(message)
+				if data.file?
+					message += "Ha compartido un archivo.
+					<a download='#{data.file.name}' href='#{data.file.href}'>Descargar</a>"
+				else
+					message += "#{data.message}"
+							
+				message += "</div>"
 
 				$('#messages').append(message)
 
@@ -46,7 +47,7 @@ ready = ->
 			from = $('#from').text()
 			id_group = $('#id_group').text()
 			to = $('#to').text()
-			App.chat.speak from, to, id_group,event.target.value
+			App.chat.speak from, to, id_group, event.target.value
 			event.target.value = ''
 			event.preventDefault()
 

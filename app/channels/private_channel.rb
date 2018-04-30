@@ -7,7 +7,7 @@ class PrivateChannel < ApplicationCable::Channel
 	end
 
 	def speak(data)
-    PrivateMessage.create({:from => data['from'], :to => data['to'], :content => data['message']})
+    	PrivateMessage.create({:from => data['from'], :to => data['to'], :content => data['message'], :messageType => 'text'})
 		ActionCable.server.broadcast "private::#{current_user}::#{params['to']}::messages", {from: data['from'], to: data['to'], message: data['message']}
 		ActionCable.server.broadcast "private::#{params['to']}::#{current_user}::messages", {from: data['from'], to: data['to'], message: data['message']}
 	end

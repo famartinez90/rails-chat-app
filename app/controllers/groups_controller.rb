@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
     end
 
     def join
-        GroupMessage.create(:id_group => params['id_group'], :content => cookies.encrypted[:user] + ' se ha unido al grupo!')
+        GroupMessage.create(:id_group => params['id_group'], :content => cookies.encrypted[:user] + ' se ha unido al grupo!', :messageType => 'text')
 
         redirect_to '/messages/group/' + params['id_group']
     end

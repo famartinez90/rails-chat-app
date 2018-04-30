@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 2018_04_29_201051) do
   create_table "group_messages", force: :cascade do |t|
     t.string "from"
     t.string "content"
+    t.integer "id_group"
+    t.string "messageType"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "id_group"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -27,15 +28,16 @@ ActiveRecord::Schema.define(version: 2018_04_29_201051) do
   create_table "lobby_messages", force: :cascade do |t|
     t.string "from"
     t.text "content"
+    t.string "messageType"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "messageType"
   end
 
   create_table "private_messages", force: :cascade do |t|
     t.string "from"
     t.string "to"
     t.string "content"
+    t.string "messageType"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

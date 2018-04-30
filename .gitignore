@@ -30,4 +30,5 @@
 /config/master.key
 
 /public/uploads/*
+!/public/uploads/.keep
 .idea*

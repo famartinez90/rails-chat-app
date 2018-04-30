@@ -28,6 +28,7 @@ class MessagesController < ApplicationController
 		channel = ChannelFactory.create(:private, {from: current_user, to: to})
 
 		@channelType = channel.getType()
+		@type = 'private'
 		@user = current_user
 		@message_to = to
 		@messages = channel.getChannelMessages()
