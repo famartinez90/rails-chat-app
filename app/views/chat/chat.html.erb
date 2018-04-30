@@ -2,10 +2,12 @@
 
 <%= button_to('Salir', "/home", method: "get") %>
 
-<% if defined? @group %>
+<% if @channelType == 'GroupChannel' %>
     <h2>Grupo: <%= @group.name %></h2>
-<% else %>
+<% elsif @channelType == 'LobbyChannel'%>
     <h2>Lobby</h2>
+<% else %>
+    <h2><%= @message_to %></h2>
 <% end %>
 
 <div id="messages" style="max-width: 300px">
@@ -31,6 +33,9 @@
 <div id="channel_type" style="display:none"><%= @channelType %></div>
 <% if defined? @group %>
     <div id="id_group" style="display:none"><%= @group.id %></div>
+<% end %>
+<% if defined? @message_to %>
+    <div id="to" style="display:none"><%= @message_to %></div>
 <% end %>
 
 <input type="text" data-behavior="speak" name="message">
