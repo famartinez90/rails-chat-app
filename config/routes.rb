@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 	get '/messages/group/:id_group', to: 'messages#getGroupMessages' #ver mensajes de grupo
 	get '/messages/lobby', to: 'messages#getLobbyMessages' #ver mensajes publicos
   get '/messages/private/:id_user', to: 'messages#getPrivateMessages' #ver mensajes privados con usuarios
-  post '/upload', to: 'upload#uploadImage'
+  post '/upload', to: 'upload#upload'
 	mount ActionCable.server => '/cable'
 end
