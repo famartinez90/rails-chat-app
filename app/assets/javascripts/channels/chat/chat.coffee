@@ -27,9 +27,8 @@ ready = ->
 				else
 					message += "<div align='center'>"
 
-				if data.file?
-					message += "Ha compartido un archivo.
-					<a download='#{data.file.name}' href='#{data.file.href}'>Descargar</a>"
+				if data.picture?
+					message += "<img src='#{data.picture.href}' />"
 				else
 					message += "#{data.message}"
 							
