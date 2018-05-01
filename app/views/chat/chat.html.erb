@@ -18,7 +18,7 @@
                 <%- if message.messageType == 'text' -%>
                     <%= message.content -%>
                 <%- else -%>
-                    Ha compartido un archivo. <%= link_to "Descargar", message.content, :download => message.content.split('/').last -%>
+                    <%= image_tag(message.content) %>
                 <%- end -%>
             </div>
         <%- else -%>
@@ -40,7 +40,7 @@
 
 <input type="text" data-behavior="speak" name="message">
 
-<%= form_tag '/upload', multipart: true do %>
+<%= form_tag '/upload/pictures', multipart: true do %>
     <input type="hidden" name="type" style="display:none" value="<%= @type %>">
     <% if defined? @group %>
         <input type="hidden" name="id_group" style="display:none" value="<%= @group.id %>">
@@ -49,6 +49,6 @@
         <input type="hidden" name="message_to" style="display:none" value="<%= @message_to %>">
     <% end %>
     <input type="hidden" name="from" style="display:none" value="<%= @user %>">
-    <label for="file">File to Upload</label> <%= file_field_tag "file" %>
+    <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %>
     <%= submit_tag %>
 <% end %>
