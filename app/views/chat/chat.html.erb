@@ -15,10 +15,12 @@
         <%- if message[:from] -%>
             <div align="left">
                 <p style="color:#2196F3"><%= message.from -%></p>
-                <%- if message.messageType == 'text' -%>
-                    <%= message.content -%>
+                <%- if message.messageType == 'picture' -%>
+                    <img src='<%= message.content -%>' height="80%" width="80%"/>
+                <%- elsif message.messageType == 'audio' -%>
+                    <audio controls><source src='<%= message.content -%>' type='audio/ogg'></audio>
                 <%- else -%>
-                    <%= image_tag(message.content) %>
+                    <%= message.content -%>
                 <%- end -%>
             </div>
         <%- else -%>
@@ -31,6 +33,7 @@
 
 <div id="from" style="display:none"><%= @user %></div>
 <div id="channel_type" style="display:none"><%= @channelType %></div>
+<div id="type" style="display:none"><%= @type %></div>
 <% if defined? @group %>
     <div id="id_group" style="display:none"><%= @group.id %></div>
 <% end %>
@@ -40,15 +43,8 @@
 
 <input type="text" data-behavior="speak" name="message">
 
-<%= form_tag '/upload/pictures', multipart: true do %>
-    <input type="hidden" name="type" style="display:none" value="<%= @type %>">
-    <% if defined? @group %>
-        <input type="hidden" name="id_group" style="display:none" value="<%= @group.id %>">
-    <% end %>
-    <% if defined? @message_to %>
-        <input type="hidden" name="message_to" style="display:none" value="<%= @message_to %>">
-    <% end %>
-    <input type="hidden" name="from" style="display:none" value="<%= @user %>">
-    <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %>
-    <%= submit_tag %>
-<% end %>
+<button class="record">Record</button>
+<button class="stop">Stop</button>
+<br/>
+<br/>
+<label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload">Upload
