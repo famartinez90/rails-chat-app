@@ -1,14 +1,20 @@
 <%= javascript_include_tag 'chat' %>
 
-<%= button_to('Salir', "/home", method: "get") %>
-
-<% if @channelType == 'GroupChannel' %>
-    <h2>Grupo: <%= @group.name %></h2>
-<% elsif @channelType == 'LobbyChannel'%>
-    <h2>Lobby</h2>
-<% else %>
-    <h2><%= @message_to %></h2>
-<% end %>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" style="color: #ffffff">
+    <% if @channelType == 'GroupChannel' %>
+        <p>Chat del grupo <%= @group.name %></p>
+    <% elsif @channelType == 'LobbyChannel'%>
+        <p>Lobby</p>
+    <% else %>
+        <p>Chat privado con <%= @message_to %></p>
+    <% end %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%= button_to('Salir', "/home", method: "get") %>
+</nav>
 
 <div id="messages" style="max-width: 300px">
     <%- @messages.each do |message| -%>
