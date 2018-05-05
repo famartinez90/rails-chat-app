@@ -28,7 +28,9 @@ ready = ->
 					message += "<div align='center'>"
 
 				if data.picture?
-					message += "<img src='#{data.picture.href}' />"
+					message += "<img src='#{data.picture.href}' height='80%' width='80%'/>"
+				else if data.audio?
+					message += "<audio controls><source src='#{data.audio.href}' type='audio/ogg'></audio>"
 				else
 					message += "#{data.message}"
 							
