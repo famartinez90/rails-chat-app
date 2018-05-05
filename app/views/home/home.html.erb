@@ -1,31 +1,68 @@
-<%= javascript_include_tag 'home' %>
 
-<%= button_to('Logout', "/logout", method: "post") %>
+<head>
+  <%= javascript_include_tag 'home' %>
+  <!-- Bootstrap core CSS -->
+  <link href="../../assets/stylesheets/bootstrap.min.css">
+</head>
 
-<h2>Hello! <%= cookies.encrypted[:user] %></h2>
-<div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div>
+<body>
 
-<p>Join lobby:</p>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" style="color: #ffffff">Hola <%= cookies.encrypted[:user] %>!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <%= button_to('Join Lobby', "/lobby/join", method: "post") %>
+    <%= button_to('Logout', "/logout", method: "post") %>
+  </nav>
 
-<%= button_to('Join', "/lobby/join", method: "post") %>
+  <div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div>
 
-<p>Create a group</p>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-4 box-shadow ml-4">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal" style="text-align: center">Seleccione un grupo para ingresar</h4>
+        </div>
+        <div class="card-body">
+          <div class="groups">
+            <% @groups.each do |group| %>
+                <a class="list-group-item list-group-item-action">
+                  <%= group.name %>
+                  <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %>
+                  <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %>
+                </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
-<form action="/group" method="POST">
-    <%= token_tag nil %>
-    Group name: <input type="text" id="gname" name="gname">
-    <button type="submit" id="submit">Submit</button>
-</form>
+    </div>
+    <div class="col-md-4">
 
-<p>Select a group to join and start chatting</p>
+      <div class="card mb-4 box-shadow mr-4">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal" style="text-align: center">Crear grupo</h4>
+        </div>
+        <div class="card-body">
+          <form action="/group" method="POST">
+            <%= token_tag nil %>
+            <input type="text" id="gname" name="gname" class="form-control mb-3" placeholder="Nombre del grupo">
+            <button class="btn btn-primary btn-block" type="submit" id="submit">Crear</button>
+          </form>
+        </div>
+      </div>
 
-<div class="groups">
-    <% @groups.each do |group| %>
-        <p><%= group.name %></p>
-        <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %>
-        <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %>
-    <% end %>
-</div>
+      <div class="card mb-4 box-shadow mr-4">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal" style="text-align: center">Usuarios activos</h4>
+        </div>
+        <div class="card-body">
+          <div id="active_users" class="list-group"></div>
+        </div>
+      </div>
+    </div>
 
-<p>Active users</p>
-<div id="active_users"></div>
+  </div>
+
+</body>
