@@ -14,7 +14,7 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><%= button_to('Join Lobby', "/lobby/join", method: "post", class: "btn btn-primary mr-3") %></li>
-          <li><%= button_to('Logout', "/logout", method: "post", class: "btn btn-danger pull-right") %></li>
+          <li><%= button_to('Logout', "/logout", method: "post", class: "btn btn-danger") %></li>
         </ul>
       </div>
     </div>
@@ -32,7 +32,7 @@
           <div class="groups">
             <% @groups.each do |group| %>
                 <a class="list-group-item list-group-item-action">
-                  <%= group.name %> 
+                  <%= group.name %>
                   <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %>
                   <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %>
                 </a>
@@ -68,11 +68,5 @@
     </div>
 
   </div>
-
-<style>
-  pull-right {
-    float: right !important;
-  }
-</style>
 
 </body>
