@@ -21,10 +21,12 @@
   </div>
 </nav>
 
-<div id="messages" style="max-width: 300px">
-    <%- @messages.each do |message| -%>
-        <%- if message[:from] -%>
-            <div align="left">
+<div class="container">
+  <div class="jumbotron" style="background-color: #ffffff;">
+    <div id="messages" style="overflow-y: scroll; height: 300px">
+      <%- @messages.each do |message| -%>
+          <%- if message[:from] -%>
+              <div align="left">
                 <p style="color:#2196F3"><%= message.from -%></p>
                 <%- if message.messageType == 'picture' -%>
                     <img src='<%= message.content -%>' height="80%" width="80%"/>
@@ -33,29 +35,32 @@
                 <%- else -%>
                     <%= message.content -%>
                 <%- end -%>
-            </div>
-        <%- else -%>
-            <div align="center">
+              </div>
+          <%- else -%>
+              <div align="center">
                 <%= message.content -%>
-            </div>
-        <%- end -%>
-    <%- end -%>
+              </div>
+          <%- end -%>
+      <%- end -%>
+    </div>
+
+    <div id="from" style="display:none"><%= @user %></div>
+    <div id="channel_type" style="display:none"><%= @channelType %></div>
+    <div id="type" style="display:none"><%= @type %></div>
+    <% if defined? @group %>
+        <div id="id_group" style="display:none"><%= @group.id %></div>
+    <% end %>
+    <% if defined? @message_to %>
+        <div id="to" style="display:none"><%= @message_to %></div>
+    <% end %>
+
+    <input type="text" class="form-control mb-3" data-behavior="speak" name="message" placeholder="Escriba el mensaje">
+
+    <button class="record">Record</button>
+    <button class="stop">Stop</button>
+    <br/>
+    <br/>
+    <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload">Upload
+  </div>
+
 </div>
-
-<div id="from" style="display:none"><%= @user %></div>
-<div id="channel_type" style="display:none"><%= @channelType %></div>
-<div id="type" style="display:none"><%= @type %></div>
-<% if defined? @group %>
-    <div id="id_group" style="display:none"><%= @group.id %></div>
-<% end %>
-<% if defined? @message_to %>
-    <div id="to" style="display:none"><%= @message_to %></div>
-<% end %>
-
-<input type="text" data-behavior="speak" name="message">
-
-<button class="record">Record</button>
-<button class="stop">Stop</button>
-<br/>
-<br/>
-<label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload">Upload

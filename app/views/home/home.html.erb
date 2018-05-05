@@ -31,15 +31,17 @@
         <div class="card-body">
           <div class="groups">
             <% @groups.each do |group| %>
-                <a class="list-group-item list-group-item-action">
-                  <%= group.name %>
-                  <%= button_to('Join', "/group/join/" + (group.id).to_s, method: "post") %>
-                  <%= button_to('Delete', "/group/delete/" + (group.id).to_s, method: "delete") %>
-                </a>
+                <li class="list-group-item list-group-item-action">
+                  <div style="display: inline-block"> <%= group.name %> </div>
+                  <div style="display: inline-block ; float: right;    margin-top: -5px;">
+                    <div style="display: inline-block;"> <%= button_to('Ingresar', "/group/join/" + (group.id).to_s, method: "post", class:"btn btn-sm btn-success") %> </div>
+                    <div style="display: inline-block;"> <%= button_to('Eliminar', "/group/delete/" + (group.id).to_s, method: "delete", class:"btn btn-sm btn-danger") %> </div>
+                  </div>
+                </li>
             <% end %>
           </div>
         </div>
-      </div>
+      </div><span class="glyphicon glyphicon-remove"></span>
 
     </div>
     <div class="col-md-4">
