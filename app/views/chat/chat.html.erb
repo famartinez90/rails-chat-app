@@ -2,6 +2,8 @@
 
 <%= button_to('Salir', "/home", method: "get") %>
 
+<div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div>
+
 <% if @channelType == 'GroupChannel' %>
     <h2>Grupo: <%= @group.name %></h2>
 <% elsif @channelType == 'LobbyChannel'%>

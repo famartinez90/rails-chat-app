@@ -15,6 +15,7 @@ ready = ->
 		params
 		{
 			connected: ->
+				@perform 'speak', { connected_user: $('#user').text() }
 
 			received: (data) ->
 				message = ''
@@ -27,13 +28,15 @@ ready = ->
 				else
 					message += "<div align='center'>"
 
-				if data.picture?
+				if data.active_users_ping
+					@perform 'speak', { connected_user: $('#user').text() }
+				else if data.picture?
 					message += "<img src='#{data.picture.href}' height='80%' width='80%'/>"
 				else if data.audio?
 					message += "<audio controls><source src='#{data.audio.href}' type='audio/ogg'></audio>"
-				else
+				else if data.message
 					message += "#{data.message}"
-							
+
 				message += "</div>"
 
 				$('#messages').append(message)
