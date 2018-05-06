@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-	def index
+	def login
 		if cookies.encrypted[:user]
 			redirect_to '/home'
 		end
