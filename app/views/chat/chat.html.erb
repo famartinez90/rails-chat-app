@@ -45,6 +45,9 @@
 
 <button class="record">Record</button>
 <button class="stop">Stop</button>
-<br/>
-<br/>
-<label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload">Upload
+<div>
+  <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload_picture">Upload
+</div>
+<div>
+  <label for="file">Upload an audio</label> <%= file_field_tag "file" %><button class="upload_audio">Upload
+</div>
