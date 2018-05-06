@@ -2,18 +2,18 @@
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-    <div class="navbar-header">
+      <div class="navbar-header" style="display: inline-block">
       <a class="navbar-brand" style="color: #ffffff">
         <% if @channelType == 'GroupChannel' %>
-            <p>Chat del grupo <%= @group.name %></p>
+            Chat del grupo <%= @group.name %>
         <% elsif @channelType == 'LobbyChannel'%>
-            <p>Lobby</p>
+            Lobby
         <% else %>
-            <p>Chat privado con <%= @message_to %></p>
+            Chat privado con <%= @message_to %>
         <% end %>
       </a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div id="navbar" class="navbar-collapse collapse" >
       <ul class="nav navbar-nav navbar-right">
         <li><%= button_to('Salir', "/home", method: "get", class: "btn btn-danger") %></li>
       </ul>
@@ -21,9 +21,9 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container" style="margin-top: 20px;">
   <div class="jumbotron" style="background-color: #ffffff;">
-    <div id="messages" style="overflow-y: scroll; height: 300px">
+    <div id="messages" style="overflow-y: scroll; height: 400px">
       <%- @messages.each do |message| -%>
           <%- if message[:from] -%>
               <div align="left">
@@ -54,13 +54,23 @@
         <div id="to" style="display:none"><%= @message_to %></div>
     <% end %>
 
-    <input type="text" class="form-control mb-3" data-behavior="speak" name="message" placeholder="Escriba el mensaje">
+    <div class="row">
+      <div class="col-6">
+        <input type="text" class="form-control mb-3" data-behavior="speak" name="message" placeholder="Escriba el mensaje">
+      </div>
+      <div class="col-6">
+        <button class="record btn btn-outline-primary">Grabar Audio</button>
+        <button class="stop btn btn-outline-success">Enviar Audio</button>
+      </div>
+    </div>
+    <div>
+      <div>
+        <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload_picture">Upload</button>
+      </div>
+      <div>
+        <label for="file">Upload an audio</label> <%= file_field_tag "file" %><button class="upload_audio">Upload</button>
+      </div>
+    </div>
 
-    <button class="record">Record</button>
-    <button class="stop">Stop</button>
-    <br/>
-    <br/>
-    <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload">Upload
   </div>
-
 </div>
