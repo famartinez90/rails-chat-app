@@ -21,7 +21,7 @@ ready = ->
 				message = ''
 
 				if data.from?
-					message += "<div align='left'>
+					message += "<div align='left' class='bubble'>
 								<p style='color:#2196F3'>
 									#{data.from}
 								</p>"
@@ -41,6 +41,9 @@ ready = ->
 				message += "</div>"
 
 				$('#messages').append(message)
+				$('#messages').stop().animate({
+					scrollTop: $('#messages')[0].scrollHeight
+				}, 800)
 
 			speak: (from, to, id_group, message) ->
 				@perform 'speak', { from: from, to: to, message: message.trim(), id_group: id_group }
