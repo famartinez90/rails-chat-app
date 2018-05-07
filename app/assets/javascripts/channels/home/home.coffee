@@ -19,10 +19,9 @@ ready = ->
 					if data.connected_user != current_user && $("#active_users ##{data.connected_user}").length == 0
 						$('#active_users').append(
 							"<div id=#{data.connected_user}>\
-								<p>#{data.connected_user}</p>\
                 <form action=/private/join class=button_to data-remote=true method=post>\
                   <div>
-                    <input type=submit value=chat>\
+                    <input class=\"list-group-item list-group-item-action\" type=submit value=#{data.connected_user}>\
                     <input type=hidden name=to value=#{data.connected_user}>\
                 </div>\
                 </form>\
