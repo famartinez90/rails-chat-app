@@ -9,7 +9,7 @@ class UploadController < ApplicationController
             file.write(picture.read)
         end
 
-        createPictureMessageFromTypeAndBroadcast(params[:type], cookies.encrypted[:user], '/uploads/' + newName, params[:id_group], params[:message_to])
+        createFileMessage(params[:type], '/uploads/' + newName, 'picture')
     end
 
     def upload_audio
@@ -21,36 +21,21 @@ class UploadController < ApplicationController
             file.write(audio.read)
         end
 
-        createAudioMessageFromTypeAndBroadcast(params[:type], cookies.encrypted[:user], '/uploads/' + newName, params[:id_group], params[:message_to])
+        createFileMessage(params[:type], '/uploads/' + newName, 'audio')
     end
     
-    private 
+    private
     
-    def createPictureMessageFromTypeAndBroadcast(type, from, content, groupId, to)
+    def createFileMessage(type, content, fileType)
         if type == 'lobby'
-            LobbyMessage.create(:from => from, :content => content, :messageType => 'picture')
-            ActionCable.server.broadcast "lobby:messages", { from: from, picture: { name: content.split('/').last, href: content }  }
+            channel = ChannelFactory.create(:lobby, {})
+            channel.createFileMessageAndBroadcast(cookies.encrypted[:user], fileType, content)
         elsif type == 'group'
-            GroupMessage.create(:id_group => groupId, :from => from, :content => content, :messageType => 'picture')
-            ActionCable.server.broadcast "group" + groupId + ":messages", { from: from, picture: { name: content.split('/').last, href: content }  }
+            channel = ChannelFactory.create(:group, { id_group: params[:id_group] })
+            channel.createFileMessageAndBroadcast(cookies.encrypted[:user], fileType, content)
         elsif type == 'private'
-            PrivateMessage.create({:from => from, :to => to, :content => content, :messageType => 'picture'})
-            ActionCable.server.broadcast "private::#{from}::#{to}::messages", { from: from, to: to, picture: { name: content.split('/').last, href: content } }
-            ActionCable.server.broadcast "private::#{to}::#{from}::messages", { from: from, to: to, picture: { name: content.split('/').last, href: content } }
-        end
-    end
-    
-    def createAudioMessageFromTypeAndBroadcast(type, from, content, groupId, to)
-        if type == 'lobby'
-            LobbyMessage.create(:from => from, :content => content, :messageType => 'audio')
-            ActionCable.server.broadcast "lobby:messages", { from: from, audio: { name: content.split('/').last, href: content }  }
-        elsif type == 'group'
-            GroupMessage.create(:id_group => groupId, :from => from, :content => content, :messageType => 'audio')
-            ActionCable.server.broadcast "group" + groupId + ":messages", { from: from, audio: { name: content.split('/').last, href: content }  }
-        elsif type == 'private'
-            PrivateMessage.create({:from => from, :to => to, :content => content, :messageType => 'audio'})
-            ActionCable.server.broadcast "private::#{from}::#{to}::messages", { from: from, to: to, audio: { name: content.split('/').last, href: content } }
-            ActionCable.server.broadcast "private::#{to}::#{from}::messages", { from: from, to: to, audio: { name: content.split('/').last, href: content } }
+            channel = ChannelFactory.create(:private, { from: cookies.encrypted[:user], to: params[:message_to] })
+            channel.createFileMessageAndBroadcast(cookies.encrypted[:user], fileType, content)
         end
     end
 end
