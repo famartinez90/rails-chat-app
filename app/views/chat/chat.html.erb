@@ -21,6 +21,9 @@
   </div>
 </nav>
 
+<div id="user" style="display: none;"><%= cookies.encrypted[:user] %></div>
+
+
 <div class="container" style="margin-top: 20px;">
   <div class="jumbotron" style="background-color: #ffffff;">
     <div id="messages" style="overflow-y: scroll; height: 400px">
@@ -65,10 +68,10 @@
     </div>
     <div>
       <div>
-        <label for="picture">Upload a picture</label> <%= file_field_tag "picture" %><button class="upload_picture">Upload</button>
+        <label for="picture">Seleccionar imagen</label> <%= file_field_tag "picture" %><button style="float: right" class="upload_picture btn btn-outline-success">Enviar</button>
       </div>
       <div>
-        <label for="file">Upload an audio</label> <%= file_field_tag "file" %><button class="upload_audio">Upload</button>
+        <label for="file">Seleccionar audio</label> <%= file_field_tag "file" %><button style="float: right" class="upload_audio btn btn-outline-success">Enviar</button>
       </div>
     </div>
   </div>
