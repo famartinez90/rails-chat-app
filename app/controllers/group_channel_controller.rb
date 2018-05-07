@@ -16,4 +16,9 @@ class GroupChannelController
     def getChannelMessages
         return GroupMessage.where(:id_group => @id_group).order(:created_at)
     end
+
+    def createFileMessageAndBroadcast(from, fileType, content)
+        GroupMessage.create(:id_group => @id_group, :from => from, :content => content, :messageType => fileType)
+        ActionCable.server.broadcast "group" + @id_group + ":messages", { from: from, file: { name: content.split('/').last, href: content, type: fileType }  }
+    end
 end

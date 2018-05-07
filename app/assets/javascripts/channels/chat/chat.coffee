@@ -30,10 +30,11 @@ ready = ->
 
 				if data.active_users_ping
 					@perform 'speak', { connected_user: $('#user').text() }
-				else if data.picture?
-					message += "<img src='#{data.picture.href}' height='80%' width='80%'/>"
-				else if data.audio?
-					message += "<audio controls><source src='#{data.audio.href}' type='audio/ogg'></audio>"
+				else if data.file?
+					if data.file.type == 'picture'
+						message += "<img src='#{data.file.href}' height='80%' width='80%'/>"
+					else if data.file.type == 'audio'
+						message += "<audio controls><source src='#{data.file.href}' type='audio/ogg'></audio>"
 				else if data.message
 					message += "#{data.message}"
 
