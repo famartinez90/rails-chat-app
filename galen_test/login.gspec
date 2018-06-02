@@ -1,0 +1,39 @@
+@objects
+    login           #login-box
+    loginTitle     h1
+    loginField     input#user
+    loginButton    button#submit
+
+@set
+    loginMaxHeight  350
+    loginMaxWidth   500
+
+@rule elemento esta centrado en relacion a %{element}
+    aligned vertically centered ${element}
+
+
+= Login = 
+    login:
+        contains loginTitle, loginField, loginButton
+
+        @on desktop, desktop-hd, desktop-fhd, tablet
+            height ${loginMaxHeight} px
+            width ${loginMaxWidth} px 
+        @on c-mobile
+            height ${loginMaxHeight} px
+            width 320 px 
+        @on c-mobile-l
+            height 320 px
+            width ${loginMaxWidth} px 
+
+    loginTitle:
+        | elemento esta centrado en relacion a login
+
+    loginButton:
+        text is "Ingresar"
+        | elemento esta centrado en relacion a login
+        visible
+
+    loginField:
+        | elemento esta centrado en relacion a login
+        visible

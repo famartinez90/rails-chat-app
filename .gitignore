@@ -32,3 +32,5 @@
 /public/uploads/*
 !/public/uploads/.keep
 .idea*
+
+/galen_test/report/*

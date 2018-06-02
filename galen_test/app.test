@@ -1,0 +1,13 @@
+@@ table devices
+    | deviceName    | tags          | size     |
+    | C-Mobile      | c-mobile      | 320x600  |
+    | C-Mobile-L    | c-mobile-l    | 600x394  |
+    | Tablet        | tablet        | 640x424  |
+    | Desktop       | desktop       | 1024x800 |
+    | Desktop-HD    | desktop-hd    | 1366x768 |
+    | Desktop-FHD   | desktop-fhd   | 1920x1080|
+
+@@ parameterized using devices
+Login page on ${deviceName} device
+    http://localhost:3000/ ${size}
+        check galen_test/login.gspec --include "${tags}"

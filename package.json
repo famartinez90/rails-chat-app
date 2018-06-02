@@ -1,5 +1,11 @@
 {
   "name": "chat",
   "private": true,
-  "dependencies": {}
+  "scripts": {
+    "test": "node_modules/galenframework-cli/bin/galen test galen_test/app.test --htmlreport \"galen_test/report\" --config \"galen.config\""
+  },
+  "dependencies": {
+    "chromedriver": "^2.38.3",
+    "galenframework-cli": "^2.3.7"
+  }
 }
