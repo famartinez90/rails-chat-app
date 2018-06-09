@@ -79,18 +79,18 @@ html, body, .container {
 
     <div class="row">
       <div class="col-6">
-        <input type="text" class="form-control mb-3" data-behavior="speak" name="message" placeholder="Escriba el mensaje">
+        <input type="text" id="speak-input" class="form-control mb-3" data-behavior="speak" name="message" placeholder="Escriba el mensaje">
       </div>
       <div class="col-6">
         <button class="record btn btn-outline-primary">Grabar Audio</button>
         <button class="stop btn btn-outline-success">Enviar Audio</button>
       </div>
     </div>
-    <div>
-      <div style="height: 55px;">
+    <div id="action-buttons">
+      <div style="height: 55px;" id="picture-upload">
         <label for="picture">Seleccionar imagen</label> <%= file_field_tag "picture" %><button style="float: right" class="upload_picture btn btn-outline-success">Enviar</button>
       </div>
-      <div>
+      <div id="audio-upload">
         <label for="file">Seleccionar audio</label> <%= file_field_tag "file" %><button style="float: right" class="upload_audio btn btn-outline-success">Enviar</button>
       </div>
     </div>

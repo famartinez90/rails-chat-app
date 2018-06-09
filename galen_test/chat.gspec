@@ -1,0 +1,25 @@
+@objects
+    chatContainer           div.container
+    chatBox                 #messages
+    chatTitle               a.navbar-brand
+    chatBubble              div.bubble
+    chatRecordAudioButton   button.record
+    chatSendImageButton     #picture-upload
+    chatSendAudioButton     #audio-upload
+    body                    body
+
+= Chat = 
+    chatBox:
+        contains chatBubble
+        height < 600 px
+        width < 1050 px
+        visible
+    
+    chatTitle:
+        visible
+        text is "Chat del grupo testgroup"
+    
+    chatRecordAudioButton, chatSendImageButton, chatSendAudioButton:
+        visible
+        inside body
+        

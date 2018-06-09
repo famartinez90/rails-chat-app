@@ -1,0 +1,7 @@
+@objects
+    homeTitle   a.navbar-brand
+
+= Home = 
+    homeTitle:
+        visible
+        text is "Hola testname!"
